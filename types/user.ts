@@ -1,15 +1,19 @@
 export interface Company {
-    name: string;
+  name: string;
 }
 
 export interface User {
-    id: number;
-    name: string;
-    email: string;
-    company: Company;
+  id: number;
+  name: string;
+  email: string;
+  company: Company;
 }
 
 export interface UserStore {
-    users: User[];
-    setUsers: (data: User[]) => void;
+  users: User[];
+  setUsers: (data: User[]) => void;
+}
+
+export interface UserListProps {
+  initialData: User;
 }

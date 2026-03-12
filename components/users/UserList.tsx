@@ -2,8 +2,10 @@
 
 import React, { useEffect } from "react";
 import { useUserStore } from "@/store/users/useUserStore";
+import Link from "next/link";
+import type { UserListProps } from "@/types/user";
 
-const UserList = ({ initialData }) => {
+const UserList = ({ initialData }: UserListProps) => {
   const { users, setUsers } = useUserStore();
 
   useEffect(() => {
@@ -11,8 +13,6 @@ const UserList = ({ initialData }) => {
       setUsers(initialData);
     }
   }, [initialData, setUsers]);
-
-  console.log(users);
 
   return (
     <>
@@ -35,7 +35,7 @@ const UserList = ({ initialData }) => {
                 <td>{email}</td>
                 <td>{company.name}</td>
                 <td>
-                  <button>View Posts</button>
+                  <Link href={`/users/${id}`}>View Posts</Link>
                 </td>
               </tr>
             );
