@@ -11,7 +11,9 @@ export interface User {
 
 export interface UserStore {
   users: User[];
+  search: string;
   setUsers: (data: User[]) => void;
+  setSearch: (searchItem: string) => void;
 }
 
 export interface UserListProps {

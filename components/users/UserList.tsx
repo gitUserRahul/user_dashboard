@@ -6,13 +6,21 @@ import Link from "next/link";
 import type { UserListProps } from "@/types/user";
 
 const UserList = ({ initialData }: UserListProps) => {
-  const { users, setUsers } = useUserStore();
+  const { users, setUsers, search } = useUserStore();
 
   useEffect(() => {
     if (initialData) {
       setUsers(initialData);
     }
   }, [initialData, setUsers]);
+
+  const filterUsers = users.filter((user) => {
+    const searchItem = search.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(searchItem) ||
+      user.email.toLowerCase().includes(searchItem)
+    );
+  });
 
   return (
     <>
@@ -26,7 +34,7 @@ const UserList = ({ initialData }: UserListProps) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((userItem) => {
+          {filterUsers.map((userItem) => {
             const { id, name, email, company } = userItem;
 
             return (
