@@ -2,7 +2,10 @@
 export const baseURL =
   process.env.BASE_URL || "https://jsonplaceholder.typicode.com";
 
-export const fetchData = async <T>(endpoint, options = {}): Promise<T> => {
+export const fetchData = async <T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<T> => {
   const url = `${baseURL}${endpoint}`;
 
   const defaultHeaders = {

@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react";
 import { useUserStore } from "@/store/users/useUserStore";
-import Link from "next/link";
 import type { UserListProps } from "@/types/user";
+import TableData from "@/components/users/TableData";
 
 const UserList = ({ initialData }: UserListProps) => {
   const { users, setUsers, search } = useUserStore();
@@ -22,9 +22,16 @@ const UserList = ({ initialData }: UserListProps) => {
     );
   });
 
+  if (filterUsers.length === 0)
+    return (
+      <h1 className="flex justify-center items-center h-screen text-2xl  font-bold">
+        No users available.
+      </h1>
+    );
+
   return (
-    <>
-      <table className="border-collapse w-full p-4">
+    <div className="overflow-x-auto">
+      <table className="min-w-150 border-collapse w-full p-4 ">
         <thead>
           <tr className="[&>th]:text-left [&>th]:pb-4 border-b border-[#F2F2F2]">
             <th>Name</th>
@@ -34,23 +41,12 @@ const UserList = ({ initialData }: UserListProps) => {
           </tr>
         </thead>
         <tbody>
-          {filterUsers.map((userItem) => {
-            const { id, name, email, company } = userItem;
-
-            return (
-              <tr key={id} className="[&>td]:py-4 border-b border-[#F2F2F2]">
-                <td>{name}</td>
-                <td>{email}</td>
-                <td>{company.name}</td>
-                <td>
-                  <Link href={`/users/${id}`}>View Posts</Link>
-                </td>
-              </tr>
-            );
-          })}
+          {filterUsers.map((userItem) => (
+            <TableData key={userItem.id} {...userItem} />
+          ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

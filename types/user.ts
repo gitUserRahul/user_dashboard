@@ -17,5 +17,16 @@ export interface UserStore {
 }
 
 export interface UserListProps {
-  initialData: User;
+  initialData: User[];
+}
+
+export interface ErrorPageProps {
+  error: {
+    message: string;
+  };
+  title?: string;
+}
+
+export interface LoadingProps {
+  name?: string;
 }

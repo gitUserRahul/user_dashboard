@@ -13,7 +13,6 @@ const SearchUser = () => {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="search user "
       />
-      ;
     </div>
   );
 };
